@@ -1,5 +1,5 @@
 <?php
-
+namespace framework\dao;
 Interface I_DAO
 {
     //查询一条记录的方法

@@ -1,5 +1,6 @@
 <?php
-require_once "./I_DAO.interface.php";
+namespace framework\dao;
+use framework\dao\I_DAO;
 
 class DAOPDO implements I_DAO
 {
@@ -57,7 +58,7 @@ class DAOPDO implements I_DAO
     //查询全部数据
     public function fetchAll($sql)
     {
-        $pdo_statement = $this->pdo->query($sql);
+        $pdo_statement = $this->pdo->query($sql); //失败返回false 成功返回pdostatement
         if ($pdo_statement === false) {
             $error = $this->pdo->errorInfo();
             $err_str = "SQL语句有误，详细信息如下：<br>" . $error[2];
@@ -87,7 +88,7 @@ class DAOPDO implements I_DAO
     //执行增删改的操作
     public function exec($sql)
     {
-        $res = $this->pdo->exec($sql);
+        $res = $this->pdo->exec($sql);//返回受影响的行数
         if ($res === false) {
             $error = $this->pdo->errorInfo();
             $err_str = 'SQL语句有误，详细信息如下：<br>' . $error[2];
