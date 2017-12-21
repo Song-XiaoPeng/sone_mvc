@@ -2,6 +2,7 @@
 namespace framework\core;
 class Framework
 {
+    const TEST = 'test';//使用const可以在这里定义常量
     public function __construct()
     {
         $this->initMCA();
@@ -72,6 +73,7 @@ class Framework
         //访问那个控制器
         $c = isset($_GET['c']) ? $_GET['c'] : 'Index';
         define('CONTROLLER', $c);
+        //const CONTROLLER = 1; 不可以在这里使用const定义常量
         //访问控制器的哪个操作
         $a = isset($_GET['a']) ? $_GET['a'] : 'indexAction';
         define('ACTION', $a);

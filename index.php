@@ -11,6 +11,6 @@
  */
 use framework\core\Framework;
 
-require_once "./framework/core/Framework.class.php";
+//require_once "./framework/core/Framework.class.php";
 
 new Framework();//实例化之前需要引入类
