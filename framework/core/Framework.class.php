@@ -4,8 +4,8 @@ class Framework
 {
     public function __construct()
     {
-        $this->autoload();
         $this->initMCA();
+        $this->autoload();
         $this->dispatch();
     }
 
