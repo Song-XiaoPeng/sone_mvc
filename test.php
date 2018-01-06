@@ -1,5 +1,20 @@
 <?php
+echo '<pre>';
+$a = 1;
+function a($b)
+{
+    var_dump($HTTP_GET_VARS);
+    $b = 2;
+    return $b;
+}
+
+$c = a(1);
+var_dump($GLOBALS['_GET']);
+//var_dump($GLOBALS);
+echo '<hr>';
+die;
 require "DAOPDO.class.php";
+
 
 $options = [
     'dbname' => 'mvc',

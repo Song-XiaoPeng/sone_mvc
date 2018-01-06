@@ -1,7 +1,7 @@
 <?php
 namespace framework\dao;
 use framework\dao\I_DAO;
-
+use \PDO;
 class DAOPDO implements I_DAO
 {
     private static $instance;
@@ -17,7 +17,7 @@ class DAOPDO implements I_DAO
         $port = isset($options['port']) ? $options['port'] : '';
 
         $dsn = "mysql:host=$host;dbname=$dbname;port=$port;charset=$charset";
-        $this->pdo = new PDO($dsn, $user, $password);
+        $this->pdo = new \PDO($dsn, $user, $password);
 
     }
 
