@@ -1,7 +1,9 @@
 <?php
 namespace framework\dao;
+
 use framework\dao\I_DAO;
 use \PDO;
+
 class DAOPDO implements I_DAO
 {
     private static $instance;
@@ -9,12 +11,12 @@ class DAOPDO implements I_DAO
 
     private function __construct($options)
     {
-        $host = isset($options['host']) ? $options['host'] : '';
-        $dbname = isset($options['dbname']) ? $options['dbname'] : '';
-        $user = isset($options['user']) ? $options['user'] : '';
-        $password = isset($options['password']) ? $options['password'] : '';
-        $charset = isset($options['charset']) ? $options['charset'] : '';
-        $port = isset($options['port']) ? $options['port'] : '';
+        $host = isset($options['host']) ? $options['host'] : 'localhost';
+        $dbname = isset($options['dbname']) ? $options['dbname'] : 'song';
+        $user = isset($options['user']) ? $options['user'] : 'root';
+        $password = isset($options['password']) ? $options['password'] : 'root';
+        $charset = isset($options['charset']) ? $options['charset'] : 'utf8';
+        $port = isset($options['port']) ? $options['port'] : '3306';
 
         $dsn = "mysql:host=$host;dbname=$dbname;port=$port;charset=$charset";
         $this->pdo = new \PDO($dsn, $user, $password);
@@ -99,6 +101,10 @@ class DAOPDO implements I_DAO
     }
 
     //引号转义包裹的方法
+    //why？
+    //$id = "1 or \1=1";
+    // $sql = "delete from user where id=1 or 1=1"
+    //so 用户输入的数据不可信，需要将用户输入的数据用引号转义：where id='1 or 1=1' \\w
     public function quote($data)
     {
         return $this->pdo->quote($data);

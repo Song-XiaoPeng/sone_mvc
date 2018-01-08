@@ -1,5 +1,11 @@
 <?php
-echo '<pre>';
+$model = DAOPDO::getSingleTon([]);
+$string = 'Naughty \' string';
+$string = "Co'mpl''ex \"st'\"ring";
+$string = "''";
+$res = $model->quote($string);
+echo $res;
+/*echo '<pre>';
 $a = 1;
 function a($b)
 {
@@ -12,7 +18,7 @@ $c = a(1);
 var_dump($GLOBALS['_GET']);
 //var_dump($GLOBALS);
 echo '<hr>';
-die;
+die;*/
 require "DAOPDO.class.php";
 
 
