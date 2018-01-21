@@ -99,13 +99,33 @@ class Model
      */
     public function update($data, $where)
     {
-        $sql = "UPDATE $this->true_table";
+        //没有条件不让更新
         if ($where == false) {
             return false;
         } else {
-            $where_str = array_map(function ($v,$k) {
-                return '`' . $k . '`='.$v;
+            $where_arr = array_map(function ($v, $k) {
+                return '`' . $k . '`=' . $v;
             }, $where);
+            $where_str = "WHERE ".implode($where_arr,' AND ');
         }
+
+        $sql = "UPDATE $this->true_table SET ";
+        $fields = array_keys($data);
+        $fields = array_map(function ($v) {
+            return '`' . $v . '`';
+        }, $fields);
+
+        $field_values = array_values($data);
+        $field_values = array_map([$this->dao, 'quote'], $field_values);
+
+        $str = '';
+        foreach ($fields as $k => $v) {
+            $str .= $v . '=' . $field_values[$k] . ',';
+        }
+
+        $str = substr($str, 0, -1);
+        $sql .= $str . $where_str;
+
+        return $this->dao->exec($sql);
     }
 }
